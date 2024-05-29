@@ -63,6 +63,18 @@ namespace U5_organizaciones_de_archivo
 
                 MessageBox.Show("Restauración completada.");
             }
+
+        }
+
+        private void UpdateFreeSpace()
+        {
+            var driveInfo = new DriveInfo(Path.GetPathRoot(backupFolder));
+            long freeSpace = driveInfo.AvailableFreeSpace;
+            long totalSpace = driveInfo.TotalSize;
+            int freeSpacePercentage = (int)((freeSpace * 100) / totalSpace);
+
+            progressBarFreeSpace.Value = freeSpacePercentage;
+            lblFreeSpace.Text = $"Espacio libre: {freeSpace / (1024 * 1024)} MB de {totalSpace / (1024 * 1024)} MB ({freeSpacePercentage}%)";
         }
     }
 }
